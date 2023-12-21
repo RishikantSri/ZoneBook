@@ -24,6 +24,8 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            // Take the first timezone from the list
+            'timezone' => array_keys(timezone_identifiers_list())[0]
         ]);
 
         $this->assertAuthenticated();

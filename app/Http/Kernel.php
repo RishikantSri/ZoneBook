@@ -66,4 +66,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'setTimezone' => \App\Http\Middleware\SetTimezoneMiddleware::class, 
     ];
+
+    protected function schedule(Schedule $schedule): void
+    {
+    // ...
+        $schedule->command('send:scheduled-notifications')->everyMinute(); 
+    }
 }

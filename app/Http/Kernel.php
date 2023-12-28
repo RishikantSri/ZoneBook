@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,9 +68,5 @@ class Kernel extends HttpKernel
         'setTimezone' => \App\Http\Middleware\SetTimezoneMiddleware::class, 
     ];
 
-    protected function schedule(Schedule $schedule): void
-    {
-    // ...
-        $schedule->command('send:scheduled-notifications')->everyMinute(); 
-    }
+   
 }

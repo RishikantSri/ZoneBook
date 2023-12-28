@@ -1,7 +1,8 @@
 <?php
  
 namespace App\Console\Commands;
- 
+
+use App\Jobs\ProcessNotificationJob;
 use App\Models\ScheduledNotification;
 use Exception;
 use Illuminate\Console\Command;

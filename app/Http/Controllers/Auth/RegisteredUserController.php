@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
@@ -19,11 +20,27 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
         $timezones = timezone_identifiers_list();
+      
+        $guessedTimezone = User::guessUserTimezoneUsingAPI($request->ip());
+        
+        
+        $response = Http::get('https://api.ipify.org?format=json');
+        
+        if ($response->ok()) {
+            $data = $response->json();
+            $publicIP = $data['ip'] ?? null;
+            $guessedTimezone = User::guessUserTimezoneUsingAPI($publicIP);
+            // return $publicIP;
+        }
+        
+        // dd($guessedTimezone, $publicIP);
+        
+        return view('auth.register', compact('timezones', 'guessedTimezone'));
  
-        return view('auth.register', compact('timezones'));
+        
     }
 
     /**

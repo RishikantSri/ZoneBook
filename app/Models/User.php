@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\ScheduledNotification;
+use Illuminate\Support\Facades\Http;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(ScheduledNotification::class);
     }
+
+    public static function guessUserTimezoneUsingAPI($ip)
+{
+    $ip = Http::get('https://ipecho.net/'. $ip .'/json');
+    if ($ip->json('timezone')) {
+        return $ip->json('timezone');
+    }
+    return null;
+}
 }

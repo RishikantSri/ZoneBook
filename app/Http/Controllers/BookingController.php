@@ -36,8 +36,8 @@ class BookingController extends Controller
             'end' => fromUserDateTime($request->validated('end'), $request->user()),
         ]);
         $startTime = CarbonImmutable::parse(toUserDateTime($booking->start, $booking->user), $booking->user->timezone); 
- 
-        // Schedule 1H reminder
+        // reminder will only be created, when scheduled time is after 1 hour from now timing.
+        // and Schedule 1H reminder, run before 1 hour of scheduled timings
         $oneHourTime = fromUserDateTime($startTime->subHour(), $booking->user);
         if (now('UTC')->lessThan($oneHourTime)) {
             $booking->user->scheduledNotifications()->create([
@@ -51,6 +51,7 @@ class BookingController extends Controller
                 'tries' => 0,
             ]);
         }
+        // dd("timing for schedule is this" . $startTime . " and sub hour is this ".$startTime->subHour() ."less hour time" . $oneHourTime. "comparison ". now('UTC')->lessThan($oneHourTime));
 
         return redirect()->route('booking.index');
     }

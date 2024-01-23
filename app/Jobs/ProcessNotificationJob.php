@@ -33,6 +33,7 @@ class ProcessNotificationJob implements ShouldQueue
                 ->find($notificationID);
             $this->fail($exception);
         }
+        
     }
 
     public function handle(): void

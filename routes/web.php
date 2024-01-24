@@ -16,7 +16,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/clear', function() {
+    Artisan::call('optimize:clear');
+    return "Cache is cleared";
+});
+
+Route::get('/dbmigration', function() {
+    Artisan::call(' migrate:fresh');
+    return "DB migrated";
+});
+
+// Route::get('/', function () {
+//     return redirect('/login');
+// });
+
+Route::get('/startreminder', function() {
+    Artisan::call('reminder:weekly');
+    return "Reminder has been started";
 });
 
 Route::get('/dashboard', function () {

@@ -13,8 +13,7 @@ use App\Notifications\BookingReminder1H;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -22,7 +21,10 @@ class BookingController extends Controller
     {
         $bookings = Booking::query()
             ->with(['user'])
+            ->where('user_id', Auth::id())
             ->get();
+
+            // dd(Auth::id());
 
         return view('bookings.index', compact('bookings'));
     }

@@ -23,8 +23,8 @@ class SendScheduledNotificationsCommand extends Command
             ->where('scheduled_at', '<=', now()->format('Y-m-d H:i'))
             ->get();
 
-            dump($notificationsToSend);
-            dump(now()->format('Y-m-d H:i'));
+            // dump($notificationsToSend);
+            // dump(now()->format('Y-m-d H:i'));
 
             // Log::info('scheduled_at and now()->format(Y-m-d H:i) ', ['now()->format(Y-m-d H:i)' => now()->format('Y-m-d H:i')]);
             

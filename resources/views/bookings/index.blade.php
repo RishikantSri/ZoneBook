@@ -49,6 +49,20 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                     <table class="table-auto w-full mt-8">
+                        <thead>
+                       
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2"><p>Default Timezone: {{ config('app.timezone') }}</p></td>
+                                <td class="border px-4 py-2"><p>User Timezone: {{ Auth::user()->timezone }}</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

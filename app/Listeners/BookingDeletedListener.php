@@ -19,8 +19,11 @@ class BookingDeletedListener
     /**
      * Handle the event.
      */
+    
     public function handle(BookingDeletedEvent $event): void
     {
-        //
+        $event->booking->scheduledNotifications()
+            ->where('user_id', $event->booking->user_id)
+            ->delete();
     }
 }

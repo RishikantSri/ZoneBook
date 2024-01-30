@@ -24,7 +24,7 @@ class BookingController extends Controller
             ->where('user_id', Auth::id())
             ->get();
 
-            // dd(Auth::id());
+          
 
         return view('bookings.index', compact('bookings'));
     }

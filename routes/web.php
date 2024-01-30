@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +34,10 @@ Route::get('/dbmigration', function() {
 //     return redirect('/login');
 // });
 
-Route::get('/startreminder', function() {
-    Artisan::call('reminder:weekly');
-    return "Reminder has been started";
-});
+Route::get('/sendnotification', function() {
+    Artisan::call('send:scheduled-notifications');
+    return "Notifications have been send";
+})->name('sendnotification');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

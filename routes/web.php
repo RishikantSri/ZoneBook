@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Gateways\PaypalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -50,5 +51,18 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('booking', BookingController::class);
 });
+
+
+// Payments Gateway Routes 
+// Paypal
+
+Route::post('paypal/payment', [PaypalController::class, 'payment'])->name('paypal.payment');
+
+Route::get('paypal/success', [PaypalController::class, 'success'])->name('paypal.success');
+Route::get('paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
+
+
+
+
 
 require __DIR__.'/auth.php';

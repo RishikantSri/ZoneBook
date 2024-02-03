@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Gateways\PaypalController;
+use App\Http\Controllers\Gateways\StripeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -57,11 +58,14 @@ Route::middleware('auth')->group(function () {
 // Paypal
 
 Route::post('paypal/payment', [PaypalController::class, 'payment'])->name('paypal.payment');
-
 Route::get('paypal/success', [PaypalController::class, 'success'])->name('paypal.success');
 Route::get('paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');
 
 
+// Stripe Payment gateway
+Route::post('stripe/payment', [StripeController::class, 'payment'])->name('stripe.payment');
+Route::get('stripe/success', [StripeController::class, 'success'])->name('stripe.success');
+Route::get('stripe/cancel', [StripeController::class, 'cancel'])->name('stripe.cancel');
 
 
 

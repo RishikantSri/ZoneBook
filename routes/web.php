@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Gateways\PaypalController;
+use App\Http\Controllers\Gateways\RazorpayController;
 use App\Http\Controllers\Gateways\StripeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,6 @@ Route::post('stripe/payment', [StripeController::class, 'payment'])->name('strip
 Route::get('stripe/success', [StripeController::class, 'success'])->name('stripe.success');
 Route::get('stripe/cancel', [StripeController::class, 'cancel'])->name('stripe.cancel');
 
-
+Route::post('razorpay/payment', [RazorpayController::class, 'payment'])->name('razorpay.payment');
 
 require __DIR__.'/auth.php';

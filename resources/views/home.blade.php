@@ -90,7 +90,7 @@
         <div class="content">
             <h2>ZoneBook</h2>
             <p>Book your events as per Time Zone, and get notified. $40 for 100 bookings</p>
-            <p>  <a href="{{ route('register') }}">Register</a> here to get first 10 Bookings free!</p>
+            <p> <a href="{{ route('register') }}">Register</a> here to get first 10 Bookings free!</p>
             <div class="payment-buttons">
                 <div class="col-md-4 my-2">
                     <form action="{{route('paypal.payment')}}" method="POST">
@@ -113,7 +113,17 @@
                         </button>
                     </form>
                 </div>
-                
+
+                <div class="col-md-4 my-2">
+                    <form action="{{route('razorpay.payment')}}" method="POST">
+                        @csrf
+                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{config('razorpay.key')}}" data-amount="{{ 40 * 100}}" data-buttontext="Buy With Razorpay" data-name="test payment" data-description="Payment" data-prefill.name="user" data-prefill.email="user1@gmail.com" data-theme.color="#ff7529">
+                        </script>
+                   
+                    </form>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -130,6 +140,10 @@
             document.body.classList.toggle('dark-mode', darkModeSwitch.checked);
         });
     </script>
+
+
+
+
 
 </body>
 
